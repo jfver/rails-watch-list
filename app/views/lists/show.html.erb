@@ -1,0 +1,17 @@
+<%= @list.name %>
+<h1><%= @list.name %></h1>
+
+<h5>Films dans cette liste :</h2>
+
+<ul>
+  <% @list.movies.each do |movie| %>
+  <%= render movie %>
+  <% all_bookmarks = Bookmark.where(list_id: @list.id) %>
+  <% bookmark = all_bookmarks.find{|bookmark| bookmark.movie_id == movie.id} %>
+  <%= bookmark.id %>
+  <%= link_to "Delete", delete_bookmark_path(bookmark.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" %> 
+  <% end %> 
+</ul>
+
+<%= link_to "Return to all lists", root_path  %>
+<%= link_to "Add a bookmark", new_list_bookmark_path(params[:id])  %>

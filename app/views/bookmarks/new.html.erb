@@ -1,0 +1,6 @@
+<%= simple_form_for [@movie, @list, @bookmark], url: "/lists/:list_id/bookmarks" do |f| %>
+  <%= f.input :comment %>
+  <%= f.association :movie %>
+  <%= f.association :list %>
+  <%= f.button :submit %>
+<% end %>
